@@ -18,6 +18,18 @@ test("form shows success message on submit with form details", () => {
     userEvent.type(first, "Niko");
     const last = getByLabelText(/Last Name/i);
     userEvent.type(last, "Lvov");
-    screen.debug();
+    const address = getByLabelText(/Address/i);
+    userEvent.type(address, "1755 Llama Ave");
+    const city = getByLabelText(/City/i);
+    userEvent.type(city, "San Francisco");
+    const state = getByLabelText(/State/i);
+    userEvent.type(state, "California");
+    const zip = getByLabelText(/Zip/i);
+    userEvent.type(zip, "94122");
+
+    const button = screen.getByRole("button");
+    userEvent.click(button);
+
+    expect(screen.getByText(/you have/i)).toHaveTextContent("You have ordered some plants! Woo-hoo!");
 });
 
